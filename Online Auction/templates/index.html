@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Auction</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100">
+
+<!-- Navbar -->
+<div class="bg-blue-600 text-white p-4 flex justify-between items-center shadow">
+    <h1 class="text-xl font-bold">🛒 Online Auction</h1>
+
+    <div class="flex items-center gap-4">
+        {% if username %}
+            <span class="font-semibold">👤 {{username}}</span>
+            <a href="/logout" class="bg-red-500 px-4 py-2 rounded">Logout</a>
+        {% else %}
+            <a href="/login" class="bg-green-500 px-4 py-2 rounded">Login</a>
+        {% endif %}
+    </div>
+</div>
+    <!-- Actions -->
+    <div class="flex justify-between mb-4">
+        <div>
+            <a href="/register" class="bg-blue-500 text-white px-4 py-2 rounded mr-2">Register</a>
+            <a href="/create_item" class="bg-indigo-500 text-white px-4 py-2 rounded">Create Auction</a>
+        </div>
+    </div>
+
+    <!-- Table -->
+    <div class="bg-white shadow rounded-lg overflow-hidden">
+        <table class="w-full text-center">
+            <thead class="bg-gray-800 text-white">
+                <tr>
+                    <th class="p-3">ID</th>
+                    <th class="p-3">Title</th>
+                    <th class="p-3">Base Price</th>
+                    <th class="p-3">Highest Bid</th>
+                    <th class="p-3">Actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
+            {% for item in items %}
+                <tr class="border-b hover:bg-gray-100">
+                    <td class="p-3">{{item[0]}}</td>
+                    <td class="p-3">{{item[2]}}</td>
+                    <td class="p-3 text-blue-600 font-semibold">₹ {{item[4]}}</td>
+                    <td class="p-3 text-green-600 font-bold">₹ {{item[7]}}</td>
+
+                    <td class="space-x-2">
+                        <a href="/bid/{{item[0]}}" 
+                           class="bg-yellow-400 hover:bg-yellow-500 px-3 py-1 rounded">
+                           Bid
+                        </a>
+
+                        <a href="/winner/{{item[0]}}" 
+                           class="bg-purple-500 text-white px-3 py-1 rounded">
+                           Winner
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+
+        </table>
+    </div>
+
+</div>
+
+</body>
+</html>
